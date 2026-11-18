@@ -1,0 +1,261 @@
+@use "sass:color";
+@use "tokens" as *;
+@use "mixins" as *;
+
+// Must match LEAVE_MS in GreetingScreen.tsx.
+$leave-duration: 600ms;
+
+// The symbols cut inside a medallion — the white disc with a thin blue ring
+// that runs along the tray sides and sits on every card back. Sizing it in
+// `min(vw, vh)` keeps the disc circular and fully visible on any viewport
+// without a stack of breakpoints.
+$medallion: clamp(200px, min(46vw, 46vh), 420px);
+
+.greeting {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  // Pale ceramic field, lit slightly from the centre so the medallion sits in
+  // a pool of light rather than on flat paper.
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      $white 0%,
+      $field 46%,
+      color.adjust($field, $lightness: -8%) 100%
+    );
+
+  transition: opacity $leave-duration $ease-out,
+    transform $leave-duration $ease-out;
+}
+
+.leaving {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+// While the symbols decode there is nothing to cut to yet, so the medallion
+// breathes rather than sitting dead.
+.loading .rule {
+  animation: rule-breathe 1600ms ease-in-out infinite;
+}
+
+.cutting .rule {
+  opacity: 0.85;
+}
+
+// ── Stage ────────────────────────────────────────────────────────────────────
+.stage {
+  display: grid;
+  justify-items: center;
+  gap: clamp(20px, 4vmin, 40px);
+  padding: 0 24px;
+}
+
+.medallion {
+  position: relative;
+  width: $medallion;
+  height: $medallion;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: $white;
+  box-shadow:
+    0 0 0 2px $sky,
+    0 18px 44px rgba($navy, 0.18),
+    0 3px 10px rgba($navy, 0.1);
+
+  // A held breath before the first cut, and a small settle after the last.
+  animation: medallion-in 700ms $ease-sticker both;
+}
+
+// The dashed sky-blue rule inset from the rim, exactly as printed on a card
+// face.
+.rule {
+  position: absolute;
+  inset: 6.5%;
+  border-radius: 50%;
+  border: 2px dashed $sky;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+// ── The cut frames ───────────────────────────────────────────────────────────
+.frames {
+  position: relative;
+  width: 60%;
+  height: 60%;
+}
+
+.frameImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  // Hidden by default and shown by class toggle. No transition anywhere near
+  // this rule: the brief is a hard cut, one symbol taking the other's place,
+  // and any easing at all turns it into a dissolve.
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+}
+
+.frameOn {
+  opacity: 1;
+  visibility: visible;
+}
+
+// ── The wordmark ─────────────────────────────────────────────────────────────
+.wordmark {
+  position: absolute;
+  width: 76%;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.72);
+  filter: drop-shadow(0 8px 14px rgba($navy, 0.22));
+
+  .revealed &,
+  .leaving & {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 260ms $ease-out, transform 620ms $ease-sticker;
+  }
+}
+
+// The reel stopping and the wordmark landing should read as one gesture, so
+// the disc takes a small knock at the moment of the reveal.
+.revealed .medallion {
+  animation: medallion-land 620ms $ease-sticker both;
+}
+
+.tagline {
+  margin: 0;
+  font-family: $font-arabic;
+  font-size: clamp(1rem, 2.4vmin, 1.4rem);
+  font-weight: 600;
+  color: $blue;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(8px);
+
+  .revealed &,
+  .leaving & {
+    opacity: 1;
+    transform: none;
+    transition: opacity 420ms $ease-out 180ms, transform 420ms $ease-out 180ms;
+  }
+}
+
+// ── Skip ─────────────────────────────────────────────────────────────────────
+.skip {
+  position: absolute;
+  right: clamp(26px, 5vmin, 54px);
+  bottom: clamp(26px, 5vmin, 54px);
+  padding: 9px 18px;
+  font-family: $font-latin;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $blue;
+  background: rgba($white, 0.7);
+  border: 1.5px solid rgba($blue, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 160ms $ease-out, border-color 160ms $ease-out,
+    background-color 160ms $ease-out;
+
+  &:hover {
+    color: $navy;
+    border-color: $blue;
+    background: $white;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  .revealed &,
+  .leaving & {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms $ease-out;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ── Keyframes ────────────────────────────────────────────────────────────────
+@keyframes medallion-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rule-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes medallion-land {
+  0% {
+    transform: scale(1);
+  }
+  38% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// ── Reduced motion ───────────────────────────────────────────────────────────
+// The cut sequence never starts (the component checks the same query), so all
+// that is left to neutralise is the entrance and the landing knock.
+@include reduced-motion {
+  .greeting,
+  .loading .rule,
+  .medallion,
+  .wordmark,
+  .tagline,
+  .revealed .medallion {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .wordmark {
+    opacity: 1;
+  }
+
+  .tagline {
+    opacity: 1;
+  }
+}

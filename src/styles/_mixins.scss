@@ -1,0 +1,32 @@
+@use "tokens" as *;
+
+// The packaging's signature: a double keyline, navy outer and sky inner,
+// held a few millimetres apart. Used on every printed face.
+@mixin double-keyline($outer: $navy, $inner: $sky, $gap: 7px, $weight: 2px) {
+  border: $weight solid $outer;
+  box-shadow: inset 0 0 0 $gap transparent, inset 0 0 0 ($gap + $weight) $inner;
+}
+
+// Display type on the box is printed as a die-cut sticker: a thick white
+// outline plus a soft shadow, as if laid on the surface rather than printed in.
+// Text has no alpha edge for drop-shadow to trace, so the ring is drawn with
+// stacked text-shadows at the four diagonals — cheap, and crisp at any size.
+@mixin sticker($ring: 5px, $ring-color: $white) {
+  text-shadow:
+    #{-$ring} #{-$ring} 0 $ring-color,
+    #{$ring} #{-$ring} 0 $ring-color,
+    #{-$ring} #{$ring} 0 $ring-color,
+    #{$ring} #{$ring} 0 $ring-color,
+    0 #{$ring * 1.6} #{$ring * 2} rgba($navy, 0.25);
+}
+
+@mixin focus-ring($color: $blue) {
+  outline: 3px solid $color;
+  outline-offset: 3px;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

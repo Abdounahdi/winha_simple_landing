@@ -1,0 +1,29 @@
+// Winha brand tokens.
+// Sampled from the vector packaging artwork — see docs/art-direction/README.md
+// in the sibling `winha` repo. Register A (packaging / card backs) supplies the
+// chrome; the card faces are the content that chrome frames.
+
+// ── Palette ──────────────────────────────────────────────────────────────────
+$navy:      #202c62; // box body, display type
+$keyline:   #1c3474; // outline strokes, dark vine leaves
+$blue:      #1d5490; // frame rules, subtitle type
+$sky:       #8cc4dc; // bright vine outlines, dashed card rule
+$field:     #ccecf8; // card-back disc, box face field
+$gold:      #fcbc30; // the `!` dot, vine berries
+$chili:     #e0242c; // fez, chilli pepper
+$white:     #ffffff;
+
+// ── Type ─────────────────────────────────────────────────────────────────────
+$font-latin:  var(--font-manrope), "Helvetica Neue", arial, sans-serif;
+$font-arabic: var(--font-cairo), $font-latin;
+
+// ── Rhythm ───────────────────────────────────────────────────────────────────
+$radius-sm:  6px;
+$radius-md:  14px;
+$radius-lg:  28px;
+
+// ── Motion ───────────────────────────────────────────────────────────────────
+// The greeting's own cut timing lives in TypeScript (cutSequence.ts) because it
+// is data, not style. These cover the reveal and the hand-off to the page.
+$ease-sticker: cubic-bezier(0.16, 1.36, 0.36, 1); // overshoot, for the wordmark
+$ease-out:     cubic-bezier(0.22, 0.61, 0.36, 1);
