@@ -1,0 +1,38 @@
+// ─── Winha brand tokens ────────────────────────────────────────────
+// Pulled from the box art: royal-blue tiles, sunflower yellow lettering,
+// fez red, sky-blue splashes and the cream of the card faces.
+
+$blue: #1f3fc4;
+$blue-deep: #12278a;
+$navy: #0a1748;
+$yellow: #ffc61a;
+$yellow-deep: #f2a900;
+$yellow-shadow: #b07a00;
+$red: #d9252f;
+$red-shadow: #96141c;
+$red-soft: #ffb3a7;
+$sky: #66c7f4;
+$sky-soft: #c4ebfd;
+$cream: #fff6e2;
+$white: #ffffff;
+$ink: #0a1748;
+
+$font-display: var(--font-display), "Arial Black", sans-serif;
+$font-body: var(--font-body), system-ui, sans-serif;
+
+$radius-sm: 12px;
+$radius: 20px;
+$radius-lg: 32px;
+
+$container: 1200px;
+$gutter: 16px;
+
+$bp-sm: 600px;
+$bp-md: 900px;
+$bp-lg: 1100px;
+
+$shadow-pop: 0 6px 0 rgba($navy, 0.9);
+$shadow-soft: 0 20px 40px -18px rgba($navy, 0.55);
+$shadow-card: 0 1px 2px rgba($navy, 0.06), 0 12px 28px -14px rgba($navy, 0.35);
+$shadow-card-hover: 0 2px 4px rgba($navy, 0.08), 0 18px 36px -16px rgba($navy, 0.45);
+$border-soft: 1px solid rgba($navy, 0.08);

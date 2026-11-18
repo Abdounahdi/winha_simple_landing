@@ -1,0 +1,57 @@
+@use "../styles/abstracts" as *;
+
+.split {
+  display: grid;
+  overflow: hidden;
+  @include panel($blue);
+
+  @include up($bp-md) {
+    grid-template-columns: 1.15fr 1fr;
+    min-height: 420px;
+  }
+}
+
+.media {
+  position: relative;
+  min-height: 260px;
+  background: $cream;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 24px;
+  text-align: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    @include tile-pattern(0.07);
+  }
+
+  > * {
+    position: relative;
+  }
+
+  h2 {
+    @include display(1.7rem, 2.4rem);
+  }
+
+  p {
+    max-width: 30rem;
+    margin-inline: auto;
+    color: rgba($white, 0.88);
+  }
+
+  @include up($bp-md) {
+    padding: 48px;
+  }
+}

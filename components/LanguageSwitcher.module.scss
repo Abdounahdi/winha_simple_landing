@@ -1,0 +1,43 @@
+@use "../styles/abstracts" as *;
+
+.switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: rgba($white, 0.1);
+  border: 1px solid rgba($white, 0.14);
+  border-radius: 999px;
+
+  a {
+    display: grid;
+    place-items: center;
+    min-width: 36px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: 0.82rem;
+    line-height: 1;
+    color: rgba($white, 0.8);
+    transition: background 0.2s, color 0.2s;
+    @include focus-ring;
+
+    &:hover {
+      color: $white;
+      background: rgba($white, 0.12);
+    }
+
+    // Arabic letter needs a touch more size to match the Latin labels
+    &[lang="ar"] {
+      font-size: 1rem;
+    }
+  }
+
+  .active,
+  .active:hover {
+    background: $yellow;
+    color: $navy;
+  }
+}

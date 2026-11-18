@@ -1,0 +1,67 @@
+@use "../styles/abstracts" as *;
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding-block: 24px;
+  @include bleed(16px);
+  @include panel($yellow, $navy);
+
+  @include up($bp-md) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-block: 32px;
+    @include bleed(40px);
+  }
+}
+
+// Each pill gets its own playful shape, like the reference.
+.pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  text-align: center;
+  border: 1px solid rgba($white, 0.7);
+  box-shadow: $shadow-card, inset 0 1px 0 rgba($white, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-card-hover, inset 0 1px 0 rgba($white, 0.8);
+  }
+
+  strong {
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1;
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  &:nth-child(1) {
+    background: $white;
+    border-radius: 999px;
+  }
+
+  &:nth-child(2) {
+    background: $sky-soft;
+    border-radius: 32px;
+  }
+
+  &:nth-child(3) {
+    background: $cream;
+    border-radius: 50% 50% 28px 28px / 64% 64% 28px 28px;
+  }
+
+  &:nth-child(4) {
+    background: $red-soft;
+    border-radius: 70px;
+  }
+}

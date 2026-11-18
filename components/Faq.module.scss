@@ -1,0 +1,102 @@
+@use "../styles/abstracts" as *;
+
+.panel {
+  position: relative;
+  padding-block: 48px;
+  @include bleed(16px);
+  overflow: hidden;
+  @include panel($yellow, $navy);
+
+  @include up($bp-md) {
+    padding-block: 64px;
+    @include bleed(40px);
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 28px;
+  color: $blue-deep;
+  @include display(1.7rem, 2.5rem);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.item {
+  background: $blue;
+  color: $white;
+  border-radius: $radius-sm;
+  border: 1px solid rgba($white, 0.14);
+  box-shadow: $shadow-card;
+  transition: box-shadow 0.25s ease;
+
+  &:hover {
+    box-shadow: $shadow-card-hover;
+  }
+  overflow: hidden;
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+    @include focus-ring;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  p {
+    padding: 0 18px 18px;
+    font-size: 0.95rem;
+    color: rgba($white, 0.88);
+  }
+
+  &[open] .chev {
+    transform: rotate(180deg);
+  }
+}
+
+.chev {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.mascot {
+  position: absolute;
+  top: 28px;
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba($navy, 0.28));
+
+  @include down($bp-lg) {
+    display: none;
+  }
+}
+
+.left {
+  left: 24px;
+  transform: rotate(-6deg);
+}
+
+.right {
+  right: 24px;
+  transform: scaleX(-1) rotate(-6deg);
+}

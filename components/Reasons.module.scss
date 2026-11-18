@@ -1,0 +1,93 @@
+@use "../styles/abstracts" as *;
+
+.section {
+  padding-block: 40px 0;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+
+  @include up($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 24px;
+  min-height: 420px;
+  border-radius: $radius;
+  color: $navy;
+
+  @include up($bp-md) {
+    padding: 36px;
+    min-height: 500px;
+  }
+
+  h3 {
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    max-width: 12ch;
+  }
+
+  p {
+    font-weight: 500;
+    max-width: 36ch;
+  }
+}
+
+.media {
+  position: relative;
+  flex: 1;
+  min-height: 200px;
+  width: min(100%, 380px);
+  align-self: center;
+  border-radius: $radius;
+  overflow: hidden;
+  border: 5px solid $white;
+  box-shadow: $shadow-soft;
+  transform: rotate(-2deg);
+  transition: transform 0.35s ease;
+
+  img {
+    object-fit: cover;
+  }
+
+  .card:hover & {
+    transform: rotate(1deg) scale(1.03);
+  }
+}
+
+.yellow {
+  background: $yellow;
+  h3 {
+    color: $blue-deep;
+  }
+}
+
+.red {
+  background: $red-soft;
+  h3 {
+    color: $red;
+  }
+}
+
+.sky {
+  background: $sky;
+  h3 {
+    color: $blue-deep;
+  }
+}
+
+.cream {
+  background: $cream;
+  h3 {
+    color: $blue;
+  }
+}
